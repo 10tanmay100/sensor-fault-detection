@@ -7,7 +7,7 @@ def get_requirement_file()->List[str]:
         Responsible to read all library names from txt file
     '''
     with open("requirements.txt","r") as f:
-        return f.readlines()
+        return f.readlines().remove('-e .')
 
 
 
