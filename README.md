@@ -6,3 +6,15 @@ The Air Pressure System (APS) is a critical component of a heavy-duty vehicle th
     creating a folder and inside that create __init__.py
 )
 3. Group of libraries called framework
+4. Pipeline folder created along with that init file
+5. components folder created along with that init file
+6. Data Access folder created for fetching the data from database(Responsible to connect with database and create a csv file on which we can do our further work)
+7. Cloud Storage folder created
+8. Configuration folder created
+9. constant folder created
+10. Entity folder created
+11. ml folder created
+
+
+
+
