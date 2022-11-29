@@ -17,6 +17,10 @@ The Air Pressure System (APS) is a critical component of a heavy-duty vehicle th
 12. First let's connect with mongo db so we write codes in data access init file
 13. Inside constant create database.py file 
 14. Write the code for configuartion to connect to database the file name mongodb_connection.py
+15. Writing own exceptions
+16. Writing the own logging file
+17. Define all constants in constant folder
+
 
 
 
