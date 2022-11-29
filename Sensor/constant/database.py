@@ -1,4 +1,4 @@
 import urllib
 DATABASE_NAME="ineuron"
-PASSWORD=""
+password=""
 MONGODB_URL=f""
