@@ -1,9 +1,12 @@
 from Sensor.configuration.mongodb_connection import MongoDBClient
 from Sensor.logger import logging
+from Sensor.entity.config_entity import *
+from Sensor.pipeline.training_pipeline import TrainPipeline
+
+
 
 
 if __name__ == '__main__':
-    logging.info("Connecting to mongodb...")
-    mongodb_client=MongoDBClient()
-    print(mongodb_client.database.list_collection_names())
+    training_pipeline=TrainPipeline()
+    print(training_pipeline.run_pipeline())
 

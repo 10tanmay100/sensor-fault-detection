@@ -23,7 +23,9 @@ The Air Pressure System (APS) is a critical component of a heavy-duty vehicle th
 18. Constant files added
 19. training pipeline folder created inside constant folder
 20. config folder created for schema yaml files
-21. 
+21. let's define data ingestion config inside config entity
+22. define TrainPipeline in training pipeline file
+23. complete data ingestion stage
 
 
 

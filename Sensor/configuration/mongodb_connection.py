@@ -1,5 +1,5 @@
 import pymongo
-from Sensor.constant.database import DATABASE_NAME,PASSWORD,MONGODB_URL
+from Sensor.constant.database import *
 import certifi
 ca=certifi.where()
 
