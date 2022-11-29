@@ -21,7 +21,9 @@ The Air Pressure System (APS) is a critical component of a heavy-duty vehicle th
 16. Writing the own logging file
 17. Define all constants in constant folder
 18. Constant files added
-19. 
+19. training pipeline folder created inside constant folder
+20. config folder created for schema yaml files
+21. 
 
 
 
