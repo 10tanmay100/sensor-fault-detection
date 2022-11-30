@@ -4,6 +4,7 @@ from Sensor.entity.artifact_entity import *
 from Sensor.logger import logging
 from Sensor.components.data_ingestion import DataIngestion
 from Sensor.components.data_validation import DataValidation
+from Sensor.components.data_transformation import DataTransformation
 import sys
 
 class TrainPipeline:
@@ -31,9 +32,14 @@ class TrainPipeline:
         except Exception as e:
             raise SensorException(e,sys)
 
-    def start_data_transformation(self):
+    def start_data_transformation(self,data_validation_artifact:DataValidationArtifact):
         try:
-            pass
+            logging.info("Data Transformation started!!!")
+            self.data_transformation_config=DataTransformationConfig(self.training_pipeline_config)
+            data_transformation=DataTransformation(data_validation_artifact=data_validation_artifact,data_transformation_config=self.data_transformation_config)
+            data_transformation_artifact=data_transformation.initiate_data_transformation()
+            return data_transformation_artifact
+            logging.info("data transformation ended!!!")
         except Exception as e:
             raise SensorException(e,sys)
 
@@ -53,7 +59,8 @@ class TrainPipeline:
         try:
             data_ingestion_artifact=self.start_data_ingestion()
             data_validation_artifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
-            return data_validation_artifact
+            data_transformation_artifact=self.start_data_transformation(data_validation_artifact)
+            return data_transformation_artifact
         except Exception as e:
             raise SensorException(e,sys)
 

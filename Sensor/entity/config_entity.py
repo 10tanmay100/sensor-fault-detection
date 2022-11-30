@@ -1,7 +1,5 @@
 from datetime import datetime
-from Sensor.constant.training_pipeline import *
-from Sensor.constant.training_pipeline.data_ingestion_constants import *
-from Sensor.constant.training_pipeline.data_validation_constants import *
+from Sensor.constant import *
 import os
 
 class TrainingPipelineConfig:
@@ -44,3 +42,16 @@ class DataValidationConfig:
         self.invalid_test_file_path:str=os.path.join(self.invalid_data_directory,TEST_FILE_NAME)
         #defining drift report file path
         self.drift_report_file_path:str=os.path.join(self.data_validation_dir,DATA_VALIDATION_DRIFT_REPORT_DIR,DATA_VALIDATION_DRIFT_REPORT_FILE_NAME)
+
+class DataTransformationConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        #defining the root directory of data transformation
+        self.data_transformation_dir:str=os.path.join(training_pipeline_config.artifact_dir,DATA_TRANSFORMATION_DIR_NAME)
+        #defining the train file path
+        self.data_transformed_train_dir:str=os.path.join(self.data_transformation_dir,TRAIN_FILE_NAME.replace('.csv','.npy'))
+        #defining the test file path
+        self.data_transformed_test_dir:str=os.path.join(self.data_transformation_dir,TEST_FILE_NAME.replace('.csv','.npy'))
+        #defining the directory to store the transformation pickle file in my system
+        self.data_transformation_transformed_obj_dir:str=os.path.join(self.data_transformation_dir,DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR)
+
+
