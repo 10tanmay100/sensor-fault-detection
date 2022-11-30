@@ -4,6 +4,8 @@ import pandas as pd
 from Sensor.logger import logging
 from Sensor.exception import SensorException
 from Sensor.configuration.mongodb_connection import MongoDBClient
+from Sensor.utils.main_utils import read_yaml_file
+from Sensor.constant.training_pipeline import SCHEMA_DROP_COLS,SCHEMA_FILE_PATH
 import sys,os
 import numpy as np
 
@@ -15,6 +17,7 @@ class SensorData:
         """
         try:
             self.mongo_client=MongoDBClient(database_name=DATABASE_NAME)
+            self._schema=read_yaml_file(SCHEMA_FILE_PATH)
         except Exception as e:
             raise SensorException(e,sys)
     def export_collection_as_dataframe(self,collection_name:str,database_name=None)->pd.DataFrame:
@@ -30,6 +33,9 @@ class SensorData:
                 df=df.drop(columns=["_id"],axis=1)
             
             df.replace({"na":np.nan},inplace=True)
+
+            columns_to_drop=self._schema[SCHEMA_DROP_COLS]
+            df.drop(columns=columns_to_drop,inplace=True)
 
             return df
         except Exception as e:

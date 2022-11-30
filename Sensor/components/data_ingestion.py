@@ -45,6 +45,7 @@ class DataIngestion:
             test_set.to_csv(self.data_ingestion_config.testing_file_path,index=False)
         except Exception as e:
             raise SensorException(e,sys) from e
+            
     def initiate_data_ingestion(self)->DataIngestionArtifact:
         try:
             dataframe=self.export_data_into_feature_store()
