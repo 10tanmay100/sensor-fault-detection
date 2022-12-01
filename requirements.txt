@@ -6,4 +6,6 @@ pyYAML
 scipy
 ipykernel
 imblearn
+xgboost
+dill
 -e .

@@ -4,7 +4,7 @@ from Sensor.exception import SensorException
 import os
 import pandas as pd
 import numpy as np
-import pickle
+import dill
 
 
 
@@ -51,11 +51,20 @@ def save_object(file_path:str,obj:object)->None:
     try:
         os.makedirs(os.path.dirname(file_path),exist_ok=True)
         with open(file_path,"wb") as pickle_obj:
-            pickle.dump(obj,pickle_obj)
+            dill.dump(obj,pickle_obj)
     except Exception as e:
         raise SensorException(e,sys) from e
 
 
 
-
+def load_object(file_path:str)->None:
+    try:
+        if os.path.exists(file_path):
+            with open(file_path,"rb") as pickle_obj:
+                dill.load(pickle_obj)
+            return dill
+        else:
+            raise Exception("file path does not exist: %s" % file_path)
+    except Exception as e:
+        raise SensorException(e,sys) from e
 

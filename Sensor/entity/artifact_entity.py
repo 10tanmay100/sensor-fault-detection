@@ -21,4 +21,17 @@ class DataTransformationArtifact:
     transformed_train_file_path:str
     transformed_test_file_path:str
 
+@dataclass(frozen=True)
+class ModelTrainerArtifact:
+    trained_model_file_path:str
+    trained_metric_artifact:str
+    test_metric_artifact:str
+
+@dataclass(frozen=True)
+class ClassificationMetricsArtifact:
+    f1_Score:float
+    precision_Score:float
+    recall_Score:float
+    roc_auc_Score:float
+
 

@@ -1,5 +1,6 @@
 from datetime import datetime
 from Sensor.constant import *
+# from Sensor.constant.training_pipeline.model_trainer_constants import *
 import os
 
 class TrainingPipelineConfig:
@@ -54,4 +55,13 @@ class DataTransformationConfig:
         #defining the directory to store the transformation pickle file in my system
         self.data_transformation_transformed_obj_dir:str=os.path.join(self.data_transformation_dir,DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR)
 
-
+class ModelBuilderConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        #defining the root diretory of model building
+        self.model_trainer_dir=os.path.join(training_pipeline_config.artifact_dir,MODEL_TRAINER_DIR_NAME)
+        #defining the model store path
+        self.model_trained_dir=os.path.join(self.model_trainer_dir,MODEL_TRAINER_TRAINED_MODEL_DIR,MODEL_TRAINER_TRAIN_MODEL_NAME)
+        #defining the model accuracy threshold
+        self.model_threshold_accuracy=MODEL_TRAINER_EXPECTED_SCORE
+        #defining overfitting threshold
+        self.model_over_underfit_thershold_diff=OVERFITTING_UNDERFITTING_THREHOLD
