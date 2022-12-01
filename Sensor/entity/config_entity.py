@@ -65,3 +65,24 @@ class ModelBuilderConfig:
         self.model_threshold_accuracy=MODEL_TRAINER_EXPECTED_SCORE
         #defining overfitting threshold
         self.model_over_underfit_thershold_diff=OVERFITTING_UNDERFITTING_THREHOLD
+
+
+class ModelEvaluationConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        #Defining the root directory for model evaluation
+        self.model_evaluator_dir=os.path.join(training_pipeline_config.artifact_dir,MODEL_EVALUATION_DIR_NAME)
+        #defining the report file path
+        self.report_file_path=os.path.join(self.model_evaluator_dir,MODEL_EVALUATION_REPORT_FILE)
+        #defining the evalutor thereshold if new model crosses that we choose the new one
+        self.model_evaluator_threshold=MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
+    
+
+class ModelPusherConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        #defining the model pusher root directory
+        self.model_pusher_dir=os.path.join(training_pipeline_config.artifact_dir,MODEL_PUSHER_DIR_NAME)
+        #defining the model pusher folder model file path
+        self.model_pusher_model_file_path=os.path.join(self.model_pusher_dir,MODEL_NAME)
+        #defining the model pusher in saved model
+        timestamp=round(datetime.now().timestamp())
+        self.saved_model_path=os.path.join(SAVED_MODEL_DIR,str(timestamp),MODEL_NAME)

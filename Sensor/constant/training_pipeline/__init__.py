@@ -1,6 +1,6 @@
 import os
 
-
+SAVED_MODEL_DIR=os.path.join("SAVED_MODEL_DIR")
 #defining common constant variables for training pipeline
 TARGET_COLUMN="class"
 PIPELINE_NAME:str="sensor"
