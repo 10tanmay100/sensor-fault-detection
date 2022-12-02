@@ -8,4 +8,6 @@ ipykernel
 imblearn
 xgboost
 dill
+fastapi
+uvicorn
 -e .

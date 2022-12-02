@@ -7,6 +7,7 @@ from Sensor.ml.metrics.classification_metrics import get_classification_metrics
 from Sensor.ml.model.estimator import SensorModel
 from Sensor.utils.main_utils import load_object,save_object,write_yaml_file
 from Sensor.ml.model.estimator import ModelResolver
+from Sensor.ml.model.estimator import TargetValueMapping
 import pandas as pd
 
 class ModelEvaluation:
@@ -46,6 +47,8 @@ class ModelEvaluation:
                               train_model=load_object(file_path=train_model_file_path)
 
                               y_true=df[TARGET_COLUMN]
+                              y_true=y_true.replace(TargetValueMapping().to_dict())
+                              df.drop(TARGET_COLUMN,axis=1,inplace=True)
                               y_train_pred=train_model.predict(df)
                               y_latest_pred=latest_model.predict(df)
 
@@ -65,7 +68,7 @@ class ModelEvaluation:
                                         best_model_path=latest_model_path,
                                         trained_model_file_path=train_model_file_path,
                                         trained_model_metric_artifact=trained_metric,best_model_metric_artifact=latest_metric)
-                              model_eval_report=model_evaluation_artifact.__dict__()
+                              model_eval_report=model_evaluation_artifact.__dict__
                               write_yaml_file(file_path=self.model_eval_config.report_file_path,content=model_eval_report,replace=True)
                               return model_evaluation_artifact
 

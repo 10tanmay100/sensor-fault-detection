@@ -61,8 +61,7 @@ def load_object(file_path:str)->None:
     try:
         if os.path.exists(file_path):
             with open(file_path,"rb") as pickle_obj:
-                dill.load(pickle_obj)
-            return dill
+                return dill.load(pickle_obj)
         else:
             raise Exception("file path does not exist: %s" % file_path)
     except Exception as e:

@@ -11,6 +11,7 @@ from Sensor.components.model_pusher import ModelPusher
 import sys
 
 class TrainPipeline:
+    is_pipeline_running=False
     def __init__(self,):
         self.training_pipeline_config=TrainingPipelineConfig()
     def start_data_ingestion(self)->DataIngestionArtifact:
@@ -81,13 +82,15 @@ class TrainPipeline:
 
     def run_pipeline(self):
         try:
+            TrainPipeline.is_pipeline_running=True
             data_ingestion_artifact=self.start_data_ingestion()
             data_validation_artifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             data_transformation_artifact=self.start_data_transformation(data_validation_artifact)
             model_trainer_artifact=self.start_model_trainer(data_transformation_artifact)
             model_evaluator_artifact=self.start_model_evaluation(data_validation_artifact=data_validation_artifact,model_trainer_artifact=model_trainer_artifact)
             model_pusher_artifact=self.start_model_pusher(model_evaluator_artifact)
-            return model_pusher_artifact
+            TrainPipeline.is_pipeline_running=False
+            return model_evaluator_artifact
         except Exception as e:
             raise SensorException(e,sys)
 
